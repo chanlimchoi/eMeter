@@ -10,7 +10,14 @@ import UIKit
 import Messages
 
 class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
+    
     var savedConversation: MSConversation?
+    
+    @IBOutlet weak var analyzerButton: UIButton!
+    @IBAction func toggleAnalyzer(_ sender: Any) {
+        self.requestPresentationStyle(.expanded)
+    }
+    
     @IBAction func sendAnalyzedMessage(_ sender: Any) {
         if (analyzedText.text != "") {
             
@@ -102,7 +109,7 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SentimentTracker.transform = SentimentTracker.transform.scaledBy(x: 1, y: 5)
+        SentimentTracker.transform = SentimentTracker.transform.scaledBy(x: 1, y: 3)
 
         // Do any additional setup after loading the view.
     }
@@ -150,6 +157,14 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
     }
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        switch presentationStyle{
+        case MSMessagesAppPresentationStyle.compact:
+            self.analyzerButton.isHidden = false
+            
+            
+        case MSMessagesAppPresentationStyle.expanded:
+            self.analyzerButton.isHidden = true
+        }
         // Called before the extension transitions to a new presentation style.
     
         // Use this method to prepare for the change in presentation style.
