@@ -19,14 +19,10 @@
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zMn-AG-sqS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jWf-bM-pPI">
-                                <rect key="frame" x="6" y="263" width="272" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zRt-Lf-IRA">
-                                <rect key="frame" x="6" y="273" width="272" height="30"/>
+                                <rect key="frame" x="60" y="226" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -35,6 +31,34 @@
                                     <action selector="handleChangeText:" destination="ObA-dk-sSI" eventType="editingChanged" id="nCc-Sw-KIn"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mck-2S-UJq">
+                                <rect key="frame" x="279" y="226" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="send"/>
+                                <connections>
+                                    <action selector="sendAnalyzedMessage:" destination="ObA-dk-sSI" eventType="touchUpInside" id="lKo-ie-qls"/>
+                                </connections>
+                            </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jWf-bM-pPI">
+                                <rect key="frame" x="48" y="216" width="272" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
+                                </variation>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUl-TL-o8u">
+                                <rect key="frame" x="141" y="80" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Analyze Text"/>
+                                <connections>
+                                    <action selector="toggleAnalyzer:" destination="ObA-dk-sSI" eventType="touchUpInside" id="9zc-GX-5aq"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emeter_360-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="lcB-gs-bwh">
+                                <rect key="frame" x="60" y="264" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -42,6 +66,9 @@
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
                         <outlet property="SentimentTracker" destination="jWf-bM-pPI" id="wjc-uE-cpq"/>
+                        <outlet property="analyzedText" destination="zRt-Lf-IRA" id="wvk-nE-wn0"/>
+                        <outlet property="analyzerButton" destination="AUl-TL-o8u" id="SNy-xR-59f"/>
+                        <outlet property="sendButton" destination="Mck-2S-UJq" id="LcD-RS-5rq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -49,4 +76,7 @@
             <point key="canvasLocation" x="137.59999999999999" y="136.73163418290855"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="emeter_360-1.png" width="293" height="178"/>
+    </resources>
 </document>

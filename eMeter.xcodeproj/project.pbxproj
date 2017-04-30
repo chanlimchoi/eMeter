@@ -13,6 +13,8 @@
 		6E4BE1911EB5BBA600498E56 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4BE1901EB5BBA600498E56 /* MessagesViewController.swift */; };
 		6E4BE1941EB5BBA600498E56 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E4BE1921EB5BBA600498E56 /* MainInterface.storyboard */; };
 		6E4BE1961EB5BBA600498E56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E4BE1951EB5BBA600498E56 /* Assets.xcassets */; };
+		6E558AED1EB6567200D860CE /* eMeter in Resources */ = {isa = PBXBuildFile; fileRef = 6E558AEC1EB6567200D860CE /* eMeter */; };
+		6E558AEF1EB65BFB00D860CE /* emeter_360-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E558AEE1EB65BFB00D860CE /* emeter_360-1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		6E4BE1931EB5BBA600498E56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		6E4BE1951EB5BBA600498E56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E4BE1971EB5BBA600498E56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E558AEC1EB6567200D860CE /* eMeter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = eMeter; path = ../../../Documents/eMeter; sourceTree = "<group>"; };
+		6E558AEE1EB65BFB00D860CE /* emeter_360-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "emeter_360-1.png"; path = "../../../Desktop/emeter_360-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +107,11 @@
 			isa = PBXGroup;
 			children = (
 				6E4BE1901EB5BBA600498E56 /* MessagesViewController.swift */,
+				6E558AEC1EB6567200D860CE /* eMeter */,
 				6E4BE1921EB5BBA600498E56 /* MainInterface.storyboard */,
 				6E4BE1951EB5BBA600498E56 /* Assets.xcassets */,
 				6E4BE1971EB5BBA600498E56 /* Info.plist */,
+				6E558AEE1EB65BFB00D860CE /* emeter_360-1.png */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
@@ -201,8 +207,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E558AED1EB6567200D860CE /* eMeter in Resources */,
 				6E4BE1961EB5BBA600498E56 /* Assets.xcassets in Resources */,
 				6E4BE1941EB5BBA600498E56 /* MainInterface.storyboard in Resources */,
+				6E558AEF1EB65BFB00D860CE /* emeter_360-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +413,7 @@
 				6E4BE19C1EB5BBA600498E56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6E4BE19E1EB5BBA600498E56 /* Build configuration list for PBXNativeTarget "eMeter" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +422,7 @@
 				6E4BE1A01EB5BBA600498E56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

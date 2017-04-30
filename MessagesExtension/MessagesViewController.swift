@@ -9,15 +9,50 @@ import Messages
 
 class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
     
+    var savedConversation: MSConversation?
+    
+    @IBOutlet weak var analyzerButton: UIButton!
+    @IBAction func toggleAnalyzer(_ sender: Any) {
+        self.requestPresentationStyle(.expanded)
+    }
+    
+    @IBAction func sendAnalyzedMessage(_ sender: Any) {
+        if (analyzedText.text != "") {
+            
+            let message = MSMessage()
+            //layout that the message object will show
+            let layout = MSMessageTemplateLayout()
+
+                layout.caption = analyzedText.text
+            //set the layout
+            message.layout = layout
+
+            //save the message in the current conversation context
+            self.savedConversation?.insert(message,
+                                           completionHandler: { (err) in
+
+                                            print("ERROR \(err.debugDescription)")
+            })
+
+            if self.presentationStyle == .expanded {
+                self.requestPresentationStyle(.compact)
+            }
+        }
+    }
+    @IBOutlet weak var analyzedText: UITextField!
+    
+    @IBOutlet weak var sendButton: UIButton!
+    
     @IBAction func handleChangeText(_ sender: UITextField) {
         //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
+        let randomNum:UInt32 = arc4random_uniform(100)
         let input: String! = sender.text
-        if input.characters.count > 2 {
+        if (input.characters.count > 2 && input.characters.count % 3 == 0) {
             let dict = [
                 "documents": [
                     [
                         "language": "en",
-                        "id": "0",
+                        "id": String(randomNum),
                         "text": input
                     ]
                 ]
@@ -44,6 +79,19 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
                             print("score")
                             DispatchQueue.main.async(execute: {
                                 self.SentimentTracker.progress = score
+                                if (Float(score) < 0.25) {
+                                    self.SentimentTracker.progressTintColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0)
+                                    self.sendButton.tintColor = UIColor(red:0.72, green:0.11, blue:0.11, alpha:1.0)
+                                } else if (Float(score) < 0.50) {
+                                    self.SentimentTracker.progressTintColor = UIColor(red:0.96, green:0.49, blue:0.00, alpha:1.0)
+                                    self.sendButton.tintColor = UIColor(red:0.96, green:0.49, blue:0.00, alpha:1.0)
+                                } else if (Float(score) < 0.75) {
+                                    self.SentimentTracker.progressTintColor = UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0)
+                                    self.sendButton.tintColor = UIColor(red:0.98, green:0.75, blue:0.18, alpha:1.0)
+                                } else if (Float(score) <= 1) {
+                                    self.SentimentTracker.progressTintColor = UIColor(red:0.11, green:0.37, blue:0.13, alpha:1.0)
+                                    self.sendButton.tintColor = UIColor(red:0.11, green:0.37, blue:0.13, alpha:1.0)
+                                }
                             })
                         }
                     } catch let error as NSError {
@@ -59,6 +107,8 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SentimentTracker.transform = SentimentTracker.transform.scaledBy(x: 1, y: 3)
+
         // Do any additional setup after loading the view.
     }
     
@@ -70,6 +120,7 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
     // MARK: - Conversation Handling
     
     override func willBecomeActive(with conversation: MSConversation) {
+        savedConversation = conversation
         // Called when the extension is about to move from the inactive to active state.
         // This will happen when the extension is about to present UI.
         
@@ -104,6 +155,14 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
     }
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        switch presentationStyle{
+        case MSMessagesAppPresentationStyle.compact:
+            self.analyzerButton.isHidden = false
+            
+            
+        case MSMessagesAppPresentationStyle.expanded:
+            self.analyzerButton.isHidden = true
+        }
         // Called before the extension transitions to a new presentation style.
     
         // Use this method to prepare for the change in presentation style.
