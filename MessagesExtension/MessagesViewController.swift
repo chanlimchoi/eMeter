@@ -2,8 +2,6 @@
 //  MessagesViewController.swift
 //  MessagesExtension
 //
-//  Created by Wellington Vicioso on 4/30/17.
-//  Copyright © 2017 Wellington Vicioso. All rights reserved.
 //
 
 import UIKit
