@@ -9,7 +9,55 @@
 import UIKit
 import Messages
 
-class MessagesViewController: MSMessagesAppViewController {
+class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
+    
+    @IBAction func handleChangeText(_ sender: UITextField) {
+        //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
+        let input: String! = sender.text
+        if input.characters.count > 2 {
+            let dict = [
+                "documents": [
+                    [
+                        "language": "en",
+                        "id": "0",
+                        "text": input
+                    ]
+                ]
+                ] as [String: Any]
+            if let jsonData = try? JSONSerialization.data(withJSONObject: dict) {
+                let url = NSURL(string: "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment")!
+                let request = NSMutableURLRequest(url: url as URL)
+                request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                request.addValue("09179f3ca9324a7eb77fc85ea4a9e892", forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
+                request.httpBody = jsonData
+                let task = URLSession.shared.dataTask(with: request as URLRequest){ data, response, error in
+                    if error != nil{
+                        print(error?.localizedDescription)
+                        return
+                    }
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                        let docs = json?["documents"] as! NSArray
+                        let scoreAndId = docs[0] as! NSDictionary
+                        let score = scoreAndId["score"] as! Float
+                        if score != nil {
+                            print("score")
+                            DispatchQueue.main.async(execute: {
+                                self.SentimentTracker.progress = score
+                            })
+                        }
+                    } catch let error as NSError {
+                        print(error)
+                    }
+                }
+                task.resume()
+            }
+        }
+    }
+    
+    @IBOutlet weak var SentimentTracker: UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
