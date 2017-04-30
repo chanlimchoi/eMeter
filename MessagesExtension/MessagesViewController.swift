@@ -23,7 +23,7 @@ class MessagesViewController: MSMessagesAppViewController, UITextFieldDelegate {
                         "text": input
                     ]
                 ]
-                ] as [String: Any]
+            ] as [String: Any]
             if let jsonData = try? JSONSerialization.data(withJSONObject: dict) {
                 let url = NSURL(string: "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment")!
                 let request = NSMutableURLRequest(url: url as URL)
